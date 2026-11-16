@@ -25,6 +25,14 @@ export function FaqSection() {
       q: "How does QRLab protect sensitive data like Wi-Fi passwords?",
       a: "Your Wi-Fi keys, vCard contacts, and personal information are encoded strictly on-device using local optical algorithms. We operate zero cloud servers, which means nothing is ever transmitted, logged, or analyzed.",
     },
+    {
+      q: "What file formats can I export from QRLab?",
+      a: "QRLab supports infinite-resolution vector SVG (ideal for large-format print, merchandise, billboards, and laser cutting) and crisp high-resolution 2048px PNG for digital displays, email signatures, and social media.",
+    },
+    {
+      q: "What types of QR codes can QRLab generate?",
+      a: "QRLab generates standard ISO/IEC 18004 compliant QR codes for Website URLs, Wi-Fi Network Quick-Connect (WPA/WEP/Open), Digital vCard Contact Cards, Email messages, Direct Phone Dialer, SMS text messages, and Plain Text.",
+    },
   ];
 
   return (

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://mrafiq.vercel.app/qrlab</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://mrafiq.vercel.app/assets/images/play-store-feature-graphic.png</image:loc>
+      <image:title>QRLab — Artistic 3D and Vector QR Code Maker</image:title>
+      <image:caption>Craft scan-stopping, custom branded QR codes with live interactive preview, custom shapes, and infinite vector SVG export.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://mrafiq.vercel.app/assets/images/icon.png</image:loc>
+      <image:title>QRLab 3D Glossy Plum Squircle Icon</image:title>
+      <image:caption>Official QRLab brand squircle icon tile with 3D glass reflections and luxury plum palette.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://mrafiq.vercel.app/assets/images/navbar-logo.png</image:loc>
+      <image:title>QRLab Brand Logo</image:title>
+      <image:caption>Official brand mark for QRLab vector QR generator.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mrafiq.vercel.app/privacy-policy.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset>

@@ -77,8 +77,9 @@ export function CtaBanner() {
               <div className="relative group max-w-sm sm:max-w-md w-full">
                 <img
                   src="/assets/images/play-store-feature-graphic.png"
-                  alt="QRLab Google Play Store Feature Banner"
+                  alt="QRLab Official Google Play Store Feature Banner — Free 3D and Vector QR Maker"
                   className="w-full h-auto object-contain block shadow-2xl transition-transform duration-300 group-hover:scale-[1.02]"
+                  loading="lazy"
                 />
               </div>
             </div>

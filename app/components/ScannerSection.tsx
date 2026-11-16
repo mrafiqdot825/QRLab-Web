@@ -33,8 +33,9 @@ export function ScannerSection() {
               <div className="relative w-full max-w-[270px] rounded-[38px] overflow-hidden border-[6px] border-[var(--ink)] shadow-xl bg-[var(--ink)]">
                 <img
                   src="/screenshots/02-studio.png"
-                  alt="QRLab Scanner & Studio Interface"
+                  alt="QRLab Optical Hardware Lens Scanner and Real-Time Studio Interface"
                   className="w-full h-auto object-cover"
+                  loading="lazy"
                 />
               </div>
             </div>

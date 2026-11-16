@@ -41,7 +41,7 @@ export function TemplatesGallery() {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-none text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-200 select-none active:scale-95 ${
+              className={`px-4 py-2 rounded-none text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-200 select-none active:scale-95 cursor-pointer ${
                 selectedCategory === cat
                   ? "bg-[var(--plum)] text-white shadow-xs font-semibold"
                   : "bg-[var(--bg-surface)] text-[var(--ink-muted)] hover:text-[var(--ink)] border border-[var(--border-subtle)] hover:bg-white"

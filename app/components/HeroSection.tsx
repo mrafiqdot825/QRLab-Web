@@ -49,6 +49,11 @@ export function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Left Column: Editorial Headline & Copy */}
           <div className="lg:col-span-7 text-center lg:text-left space-y-6 sm:space-y-8">
+            {/* Semantic Entity Identifier for SEO & AEO */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-none bg-[var(--plum-light)] border border-[var(--plum)]/20 text-xs font-semibold text-[var(--plum)] tracking-wider">
+              <span>✦ QRLab — Free 3D & Vector QR Code Maker</span>
+            </div>
+
             {/* Signature Morrow-Style Headline */}
             <h1 className="h1-editorial font-bold text-[var(--ink)] tracking-tight">
               Make QR codes, <br />
@@ -278,8 +283,9 @@ export function HeroSection() {
                       <div className="absolute top-2 left-1/2 -translate-x-1/2 w-16 h-3 bg-[var(--ink)] rounded-full z-10" />
                       <img
                         src="/screenshots/01-home.png"
-                        alt="QRLab Android App Home Screen"
+                        alt="QRLab Android App Home Screen — 3D and Vector QR Generator"
                         className="w-full h-auto object-cover"
+                        loading="lazy"
                       />
                     </div>
                     <span className="mt-3 text-xs text-[var(--ink-muted)] font-medium">

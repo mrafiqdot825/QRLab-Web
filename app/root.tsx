@@ -30,6 +30,10 @@ export const links: Route.LinksFunction = () => [
     rel: "apple-touch-icon",
     href: "/assets/images/icon.png",
   },
+  {
+    rel: "manifest",
+    href: "/site.webmanifest",
+  },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -37,8 +41,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en" className="scroll-smooth">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#FBEDE6" />
+        <meta name="application-name" content="QRLab" />
+        <meta name="apple-mobile-web-app-title" content="QRLab" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="format-detection" content="telephone=no" />
         <Meta />
         <Links />
       </head>

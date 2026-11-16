@@ -1,0 +1,23 @@
+{
+  "name": "QRLab — Artistic 3D & Vector QR Code Maker",
+  "short_name": "QRLab",
+  "description": "Craft scan-stopping, custom branded QR codes with live interactive preview, custom shapes, luxury palettes, and infinite vector SVG export. 100% private & offline.",
+  "start_url": "/qrlab",
+  "display": "standalone",
+  "background_color": "#FBEDE6",
+  "theme_color": "#FBEDE6",
+  "icons": [
+    {
+      "src": "/assets/images/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/navbar-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["utilities", "design", "productivity"]
+}

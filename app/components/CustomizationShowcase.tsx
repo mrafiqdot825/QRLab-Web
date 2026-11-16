@@ -114,8 +114,9 @@ export function CustomizationShowcase() {
               <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-3.5 bg-[var(--ink)] rounded-full z-10" />
               <img
                 src="/screenshots/03-customize.png"
-                alt="QRLab Customization Tab Screenshot"
+                alt="QRLab Customization Tab — Custom Module Shapes and Corner Eye Geometries"
                 className="w-full h-auto object-cover"
+                loading="lazy"
               />
             </div>
             <div className="mt-4 text-center">

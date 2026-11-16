@@ -36,7 +36,7 @@ export function InteractiveStudio() {
   const [customFg, setCustomFg] = useState<string>("");
 
   // Form states
-  const [urlInput, setUrlInput] = useState("https://mrafiq.vercel.app");
+  const [urlInput, setUrlInput] = useState("https://rafiqdev.com");
 
   const [wifiSsid, setWifiSsid] = useState("Studio_Guest_5G");
   const [wifiPass, setWifiPass] = useState("Artistic2026!");
@@ -49,9 +49,9 @@ export function InteractiveStudio() {
   const [vcardTitle, setVcardTitle] = useState("Lead Engineer");
   const [vcardPhone, setVcardPhone] = useState("+1 555-0199");
   const [vcardEmail, setVcardEmail] = useState("mrafiqdot825@gmail.com");
-  const [vcardUrl, setVcardUrl] = useState("https://mrafiq.vercel.app");
+  const [vcardUrl, setVcardUrl] = useState("https://rafiqdev.com");
 
-  const [emailTo, setEmailTo] = useState("contact@qrlab.me");
+  const [emailTo, setEmailTo] = useState("info@rafiqdev.com");
   const [emailSubject, setEmailSubject] = useState("Partnership Inquiry");
   const [emailBody, setEmailBody] = useState(
     "Hello! I loved creating QR codes with QRLab.",
@@ -197,7 +197,7 @@ export function InteractiveStudio() {
                     <button
                       key={fmt.id}
                       onClick={() => setActiveFormat(fmt.id as FormatTab)}
-                      className={`flex flex-col items-center justify-center py-3 px-2 rounded-none transition-all duration-200 select-none ${
+                      className={`flex flex-col items-center justify-center py-3 px-2 rounded-none transition-all duration-200 select-none cursor-pointer ${
                         isActive
                           ? "bg-[var(--plum)] text-white shadow-xs font-semibold scale-102"
                           : "bg-[var(--bg-canvas)] text-[var(--ink-muted)] hover:text-[var(--ink)] hover:bg-white"
@@ -525,7 +525,7 @@ export function InteractiveStudio() {
                       <button
                         key={shape}
                         onClick={() => setModuleShape(shape)}
-                        className={`py-2 px-3 rounded-none text-xs capitalize transition-all select-none ${
+                        className={`py-2 px-3 rounded-none text-xs capitalize transition-all select-none cursor-pointer ${
                           moduleShape === shape
                             ? "bg-[var(--plum)] text-white font-semibold shadow-xs"
                             : "bg-white/70 border border-[var(--border-subtle)] text-[var(--ink-muted)] hover:text-[var(--ink)] hover:bg-white"
@@ -549,7 +549,7 @@ export function InteractiveStudio() {
                       <button
                         key={eye}
                         onClick={() => setEyeStyle(eye)}
-                        className={`py-2 px-3 rounded-none text-xs capitalize transition-all select-none ${
+                        className={`py-2 px-3 rounded-none text-xs capitalize transition-all select-none cursor-pointer ${
                           eyeStyle === eye
                             ? "bg-[var(--plum)] text-white font-semibold shadow-xs"
                             : "bg-white/70 border border-[var(--border-subtle)] text-[var(--ink-muted)] hover:text-[var(--ink)] hover:bg-white"
@@ -574,7 +574,7 @@ export function InteractiveStudio() {
                     <button
                       key={l}
                       onClick={() => setLogo(l)}
-                      className={`py-2 px-1 text-[11px] rounded-none capitalize transition-all select-none ${
+                      className={`py-2 px-1 text-[11px] rounded-none capitalize transition-all select-none cursor-pointer ${
                         logo === l
                           ? "bg-[var(--plum)] text-white font-semibold shadow-xs"
                           : "bg-white/70 border border-[var(--border-subtle)] text-[var(--ink-muted)] hover:text-[var(--ink)] hover:bg-white"
@@ -604,7 +604,7 @@ export function InteractiveStudio() {
                         setSelectedTheme(preset);
                         setCustomFg("");
                       }}
-                      className={`group relative h-10 rounded-2xl transition-all flex items-center justify-center select-none ${
+                      className={`group relative h-10 rounded-2xl transition-all flex items-center justify-center select-none cursor-pointer ${
                         selectedTheme.id === preset.id && !customFg
                           ? "ring-2 ring-offset-2 ring-[var(--plum)] scale-105 shadow-xs"
                           : "hover:scale-102 opacity-85 hover:opacity-100"
