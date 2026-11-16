@@ -33,7 +33,7 @@ export function Footer() {
             <div className="text-xs text-[var(--ink-muted)]">
               Crafted by{" "}
               <a
-                href="https://mrafiq.vercel.app/"
+                href="https://rafiqdev.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold text-[var(--ink)] hover:text-[var(--plum)] transition-colors underline underline-offset-2"
@@ -136,7 +136,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="https://mrafiq.vercel.app/"
+                  href="https://rafiqdev.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 hover:text-[var(--plum)] transition-colors"
@@ -162,7 +162,7 @@ export function Footer() {
                   className="inline-flex items-center gap-1.5 hover:text-[var(--plum)] transition-colors"
                 >
                   <Mail className="w-3.5 h-3.5" />
-                  <span>mrafiqdot825@gmail.com</span>
+                  <span>info@rafiqdev.com</span>
                 </a>
               </li>
             </ul>

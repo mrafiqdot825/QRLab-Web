@@ -17,7 +17,7 @@ export function HeroSection() {
 
   const heroSvgString = useMemo(() => {
     return generateQRSVGString({
-      text: "https://mrafiq.vercel.app",
+      text: "https://rafiqdev.com",
       fgColor: currentTheme.qrColor,
       bgColor: "#FFFFFF",
       moduleShape,
