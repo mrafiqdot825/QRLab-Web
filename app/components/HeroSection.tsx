@@ -51,7 +51,7 @@ export function HeroSection() {
           <div className="lg:col-span-7 text-center lg:text-left space-y-6 sm:space-y-8">
             {/* Semantic Entity Identifier for SEO & AEO */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-none bg-[var(--plum-light)] border border-[var(--plum)]/20 text-xs font-semibold text-[var(--plum)] tracking-wider">
-              <span>✦ QRLab — Free 3D & Vector QR Code Maker</span>
+              <span>QRLab — Free 3D & Vector QR Code Maker</span>
             </div>
 
             {/* Signature Morrow-Style Headline */}
@@ -169,7 +169,7 @@ export function HeroSection() {
                   <div className="flex items-center bg-white/70 backdrop-blur-xs p-1 rounded-none text-xs font-medium border border-[var(--border-subtle)]">
                     <button
                       onClick={() => setActiveTab("live")}
-                      className={`px-3 py-1 rounded-none transition-all duration-200 select-none ${
+                      className={`px-3 py-1 rounded-none transition-all duration-200 select-none cursor-pointer ${
                         activeTab === "live"
                           ? "bg-[var(--plum)] text-white font-semibold shadow-xs"
                           : "text-[var(--ink-muted)] hover:text-[var(--ink)]"
@@ -179,7 +179,7 @@ export function HeroSection() {
                     </button>
                     <button
                       onClick={() => setActiveTab("app")}
-                      className={`px-3 py-1 rounded-none transition-all duration-200 select-none ${
+                      className={`px-3 py-1 rounded-none transition-all duration-200 select-none cursor-pointer ${
                         activeTab === "app"
                           ? "bg-[var(--plum)] text-white font-semibold shadow-xs"
                           : "text-[var(--ink-muted)] hover:text-[var(--ink)]"
@@ -232,7 +232,7 @@ export function HeroSection() {
                           <button
                             key={preset.id}
                             onClick={() => setSelectedPresetIndex(idx)}
-                            className={`group relative w-9 h-9 sm:w-10 sm:h-10 rounded-full transition-all duration-200 flex items-center justify-center select-none active:scale-90 ${
+                            className={`group relative w-9 h-9 sm:w-10 sm:h-10 rounded-full transition-all duration-200 flex items-center justify-center select-none active:scale-90 cursor-pointer ${
                               selectedPresetIndex === idx
                                 ? "ring-2 ring-offset-2 ring-[var(--plum)] scale-110 shadow-sm"
                                 : "hover:scale-105 opacity-85 hover:opacity-100"
@@ -262,7 +262,7 @@ export function HeroSection() {
                               <button
                                 key={shape}
                                 onClick={() => setModuleShape(shape)}
-                                className={`px-3 py-1 rounded-none text-xs capitalize transition-all duration-200 select-none active:scale-95 ${
+                                className={`px-3 py-1 rounded-none text-xs capitalize transition-all duration-200 select-none active:scale-95 cursor-pointer ${
                                   moduleShape === shape
                                     ? "bg-[var(--plum)] text-white font-semibold shadow-xs"
                                     : "text-[var(--ink-muted)] hover:text-[var(--ink)]"
@@ -297,18 +297,6 @@ export function HeroSection() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Subtle Scroll Down Prompt */}
-      <div className="hidden sm:flex justify-center pb-4 pt-1 text-[var(--ink-muted)]">
-        <a
-          href="#features"
-          className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-none bg-white/70 hover:bg-white text-xs font-medium text-[var(--ink-muted)] hover:text-[var(--plum)] border border-[var(--border-subtle)] shadow-xs transition-all hover:scale-102"
-          aria-label="Scroll to features"
-        >
-          <span>Explore features</span>
-          <ArrowDown className="w-3.5 h-3.5 animate-bounce text-[var(--plum)]" />
-        </a>
       </div>
     </section>
   );
