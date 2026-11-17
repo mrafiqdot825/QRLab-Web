@@ -1,6 +1,6 @@
 export interface TemplateItem {
   id: string;
-  category: "Business" | "Restaurant" | "Portfolio" | "Resume" | "Events" | "WiFi" | "Payments" | "Social";
+  category: "Business" | "Restaurant" | "Portfolio" | "Cloud Media" | "Resume" | "Events" | "WiFi" | "Payments" | "Social";
   title: string;
   desc: string;
   type: "url" | "vcard" | "wifi" | "text";
@@ -10,12 +10,13 @@ export interface TemplateItem {
   gradient: [string, string];
   moduleShape: "square" | "rounded" | "dots";
   eyeStyle: "square" | "rounded" | "circle";
-  logo: "none" | "qrstudio" | "star" | "heart" | "shield";
+  logo: "none" | "qrstudio" | "star" | "heart" | "shield" | "drive";
 }
 
 export const TEMPLATE_CATEGORIES = [
   "All",
   "Business",
+  "Cloud Media",
   "Restaurant",
   "Portfolio",
   "Resume",
@@ -137,5 +138,19 @@ export const TEMPLATES_DATA: TemplateItem[] = [
     moduleShape: "dots",
     eyeStyle: "rounded",
     logo: "heart",
+  },
+  {
+    id: "9",
+    category: "Cloud Media",
+    title: "Google Drive Media Vault",
+    desc: "Vibrant butter & gold layout for streaming videos, client photo galleries, and shared folders.",
+    type: "url",
+    sampleValue: "https://drive.google.com/drive/folders/1A2B3C_DesignAssetsVault?usp=sharing",
+    themeId: "warm-butter",
+    color: "#4A3508",
+    gradient: ["#FEF9E7", "#FBE9A8"],
+    moduleShape: "rounded",
+    eyeStyle: "circle",
+    logo: "drive",
   },
 ];

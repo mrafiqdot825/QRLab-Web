@@ -11,7 +11,20 @@ import {
   Check,
   ShieldCheck,
   CheckCircle2,
+  FolderOpen,
+  Video,
+  Image as ImageIcon,
+  Sparkles,
+  Play,
+  ExternalLink,
 } from "lucide-react";
+import { GoogleDriveIcon } from "./icons";
+import {
+  parseGoogleDriveUrl,
+  SAMPLE_DRIVE_LINKS,
+  type DriveContentType,
+  type DriveAction,
+} from "../utils/google-drive";
 import { THEME_PRESETS } from "../data/theme-presets";
 import type { ThemePreset } from "../data/theme-presets";
 import {
@@ -22,7 +35,7 @@ import {
 import type { ModuleShape, EyeStyle, LogoPreset } from "../utils/qr-generator";
 import { Button } from "./ui/Button";
 
-type FormatTab = "url" | "wifi" | "vcard" | "email" | "phone" | "text";
+type FormatTab = "url" | "drive" | "wifi" | "vcard" | "email" | "phone" | "text";
 
 export function InteractiveStudio() {
   const [activeFormat, setActiveFormat] = useState<FormatTab>("url");
@@ -37,6 +50,15 @@ export function InteractiveStudio() {
 
   // Form states
   const [urlInput, setUrlInput] = useState("https://rafiqdev.com");
+
+  // Google Drive state
+  const [driveUrl, setDriveUrl] = useState("https://drive.google.com/drive/folders/1A2B3C_DesignAssetsVault?usp=sharing");
+  const [driveType, setDriveType] = useState<DriveContentType>("auto");
+  const [driveAction, setDriveAction] = useState<DriveAction>("preview");
+
+  const driveParsed = useMemo(() => {
+    return parseGoogleDriveUrl(driveUrl, driveType, driveAction);
+  }, [driveUrl, driveType, driveAction]);
 
   const [wifiSsid, setWifiSsid] = useState("Studio_Guest_5G");
   const [wifiPass, setWifiPass] = useState("Artistic2026!");
@@ -68,6 +90,8 @@ export function InteractiveStudio() {
     switch (activeFormat) {
       case "url":
         return urlInput.trim() || "https://qrlab.me";
+      case "drive":
+        return driveParsed.optimizedUrl || "https://drive.google.com";
       case "wifi":
         return `WIFI:S:${wifiSsid};T:${wifiEnc};P:${wifiPass};${wifiHidden ? "H:true;" : ""};`;
       case "vcard":
@@ -83,6 +107,7 @@ export function InteractiveStudio() {
   }, [
     activeFormat,
     urlInput,
+    driveParsed,
     wifiSsid,
     wifiPass,
     wifiEnc,
@@ -134,6 +159,12 @@ export function InteractiveStudio() {
       label: "Website",
       icon: Globe,
       pastel: "bg-[var(--lavender)]",
+    },
+    {
+      id: "drive",
+      label: "Google Drive",
+      icon: GoogleDriveIcon,
+      pastel: "bg-[var(--butter)]",
     },
     { id: "wifi", label: "Wi-Fi", icon: Wifi, pastel: "bg-[var(--sage)]" },
     {
@@ -189,7 +220,7 @@ export function InteractiveStudio() {
               <span className="text-xs font-semibold text-[var(--ink-muted)] uppercase tracking-wider block mb-3">
                 1. Select Payload Type
               </span>
-              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
                 {formats.map((fmt) => {
                   const Icon = fmt.icon;
                   const isActive = activeFormat === fmt.id;
@@ -214,12 +245,12 @@ export function InteractiveStudio() {
             </div>
 
             {/* 2. Payload Form Fields Card */}
-            <div className="bg-[var(--bg-surface)] rounded-[28px] p-6 sm:p-7 border border-[var(--border-subtle)] shadow-[0_8px_24px_rgba(74,15,58,0.04)]">
+            <div className="bg-[var(--bg-surface)] rounded-none p-6 sm:p-7 border border-[var(--border-subtle)] shadow-[0_8px_24px_rgba(74,15,58,0.04)]">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-xs font-semibold text-[var(--ink-muted)] uppercase tracking-wider">
                   2. Enter Payload Details
                 </span>
-                <span className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-[var(--bg-canvas)] text-[var(--plum)]">
+                <span className="text-xs font-medium px-2.5 py-0.5 rounded-none bg-[var(--bg-canvas)] text-[var(--plum)] border border-[var(--border-subtle)]">
                   100% Offline
                 </span>
               </div>
@@ -245,6 +276,242 @@ export function InteractiveStudio() {
                     Direct permanent URL. Zero intermediate redirects, zero
                     subscription expiration.
                   </p>
+                </div>
+              )}
+
+              {/* Google Drive Video / Image / Folder Input */}
+              {activeFormat === "drive" && (
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label
+                        htmlFor="drive-url-input"
+                        className="flex items-center gap-2 text-sm font-semibold text-[var(--ink)]"
+                      >
+                        <GoogleDriveIcon className="w-4 h-4" />
+                        <span>Google Drive Link (Folder, Video, Image, or File)</span>
+                      </label>
+                      {driveUrl && (
+                        <button
+                          type="button"
+                          onClick={() => setDriveUrl("")}
+                          className="text-xs text-[var(--ink-muted)] hover:text-[var(--plum)] underline cursor-pointer"
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+                    <input
+                      id="drive-url-input"
+                      type="url"
+                      value={driveUrl}
+                      onChange={(e) => setDriveUrl(e.target.value)}
+                      placeholder="https://drive.google.com/drive/folders/... or /file/d/..."
+                      className="w-full px-4 py-3 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-none text-[var(--ink)] placeholder:text-[var(--ink-muted)]/60 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--plum)] focus:bg-white transition-all font-mono text-xs sm:text-sm"
+                    />
+                  </div>
+
+                  {/* 1-Click Quick Samples */}
+                  <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+                    <span className="text-[11px] font-semibold text-[var(--ink-muted)] uppercase tracking-wider mr-1">
+                      Quick Samples:
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setDriveUrl(SAMPLE_DRIVE_LINKS.folder.url);
+                        setDriveType(SAMPLE_DRIVE_LINKS.folder.type);
+                        setDriveAction(SAMPLE_DRIVE_LINKS.folder.action);
+                        setLogo("drive");
+                      }}
+                      className="text-xs px-2.5 py-1 bg-[var(--bg-canvas)] hover:bg-[var(--plum)]/10 text-[var(--ink)] border border-[var(--border-subtle)] rounded-none transition-colors cursor-pointer flex items-center gap-1"
+                    >
+                      <FolderOpen className="w-3 h-3 text-[var(--plum)]" />
+                      <span>Shared Folder</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setDriveUrl(SAMPLE_DRIVE_LINKS.video.url);
+                        setDriveType(SAMPLE_DRIVE_LINKS.video.type);
+                        setDriveAction(SAMPLE_DRIVE_LINKS.video.action);
+                        setLogo("drive");
+                      }}
+                      className="text-xs px-2.5 py-1 bg-[var(--bg-canvas)] hover:bg-[var(--plum)]/10 text-[var(--ink)] border border-[var(--border-subtle)] rounded-none transition-colors cursor-pointer flex items-center gap-1"
+                    >
+                      <Video className="w-3 h-3 text-[var(--plum)]" />
+                      <span>4K Video Stream</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setDriveUrl(SAMPLE_DRIVE_LINKS.image.url);
+                        setDriveType(SAMPLE_DRIVE_LINKS.image.type);
+                        setDriveAction(SAMPLE_DRIVE_LINKS.image.action);
+                        setLogo("drive");
+                      }}
+                      className="text-xs px-2.5 py-1 bg-[var(--bg-canvas)] hover:bg-[var(--plum)]/10 text-[var(--ink)] border border-[var(--border-subtle)] rounded-none transition-colors cursor-pointer flex items-center gap-1"
+                    >
+                      <ImageIcon className="w-3 h-3 text-[var(--plum)]" />
+                      <span>High-Res Photo</span>
+                    </button>
+                  </div>
+
+                  {/* Content Type Selector */}
+                  <div>
+                    <label className="block text-xs font-semibold text-[var(--ink)] mb-1.5">
+                      Content Format Type
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5">
+                      {[
+                        { id: "auto", label: "Auto-Detect", icon: Sparkles },
+                        { id: "folder", label: "Folder", icon: FolderOpen },
+                        { id: "video", label: "Video", icon: Video },
+                        { id: "image", label: "Photo / Image", icon: ImageIcon },
+                        { id: "file", label: "Generic File", icon: FileText },
+                      ].map((item) => {
+                        const Icon = item.icon;
+                        const isSel = driveType === item.id;
+                        return (
+                          <button
+                            key={item.id}
+                            type="button"
+                            onClick={() => setDriveType(item.id as DriveContentType)}
+                            className={`flex items-center justify-center gap-1.5 py-2 px-2 text-xs rounded-none border transition-all cursor-pointer ${
+                              isSel
+                                ? "bg-[var(--plum)] text-white border-[var(--plum)] font-semibold shadow-xs"
+                                : "bg-[var(--bg-canvas)] border-[var(--border-subtle)] text-[var(--ink-muted)] hover:text-[var(--ink)] hover:bg-white"
+                            }`}
+                          >
+                            <Icon className="w-3.5 h-3.5" />
+                            <span className="truncate">{item.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* On-Scan View Action */}
+                  {driveParsed.detectedType !== "folder" && (
+                    <div>
+                      <label className="block text-xs font-semibold text-[var(--ink)] mb-1.5">
+                        On-Scan Action & Playback Mode
+                      </label>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setDriveAction("preview")}
+                          className={`p-2.5 text-left border rounded-none transition-all cursor-pointer ${
+                            driveAction === "preview"
+                              ? "bg-[var(--plum)]/5 border-[var(--plum)] ring-1 ring-[var(--plum)]"
+                              : "bg-[var(--bg-canvas)] border-[var(--border-subtle)] hover:bg-white"
+                          }`}
+                        >
+                          <div className="flex items-center gap-1.5 font-semibold text-xs text-[var(--ink)] mb-0.5">
+                            <Play className="w-3 h-3 text-[var(--plum)]" />
+                            <span>Full-Screen Player</span>
+                          </div>
+                          <p className="text-[11px] text-[var(--ink-muted)] leading-tight">
+                            Recommended for mobile: streams clean video/photo without Drive chrome.
+                          </p>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setDriveAction("view")}
+                          className={`p-2.5 text-left border rounded-none transition-all cursor-pointer ${
+                            driveAction === "view"
+                              ? "bg-[var(--plum)]/5 border-[var(--plum)] ring-1 ring-[var(--plum)]"
+                              : "bg-[var(--bg-canvas)] border-[var(--border-subtle)] hover:bg-white"
+                          }`}
+                        >
+                          <div className="flex items-center gap-1.5 font-semibold text-xs text-[var(--ink)] mb-0.5">
+                            <Globe className="w-3 h-3 text-[var(--plum)]" />
+                            <span>Drive Web View</span>
+                          </div>
+                          <p className="text-[11px] text-[var(--ink-muted)] leading-tight">
+                            Standard Google Drive landing page with comments, metadata & menu.
+                          </p>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setDriveAction("direct")}
+                          className={`p-2.5 text-left border rounded-none transition-all cursor-pointer ${
+                            driveAction === "direct"
+                              ? "bg-[var(--plum)]/5 border-[var(--plum)] ring-1 ring-[var(--plum)]"
+                              : "bg-[var(--bg-canvas)] border-[var(--border-subtle)] hover:bg-white"
+                          }`}
+                        >
+                          <div className="flex items-center gap-1.5 font-semibold text-xs text-[var(--ink)] mb-0.5">
+                            <Download className="w-3 h-3 text-[var(--plum)]" />
+                            <span>Direct Stream</span>
+                          </div>
+                          <p className="text-[11px] text-[var(--ink-muted)] leading-tight">
+                            Direct asset export stream or instant automatic download.
+                          </p>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Smart Link Status / Target Inspector */}
+                  <div className="p-3.5 bg-[var(--bg-canvas)] border border-[var(--border-subtle)] rounded-none space-y-2">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] font-semibold text-[var(--ink-muted)] uppercase tracking-wider">
+                          Detected Target:
+                        </span>
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold bg-[var(--plum)]/10 text-[var(--plum)] border border-[var(--plum)]/20 rounded-none capitalize">
+                          {driveParsed.detectedType === "folder" && <FolderOpen className="w-3 h-3" />}
+                          {driveParsed.detectedType === "video" && <Video className="w-3 h-3" />}
+                          {driveParsed.detectedType === "image" && <ImageIcon className="w-3 h-3" />}
+                          {driveParsed.detectedType === "file" && <FileText className="w-3 h-3" />}
+                          {driveParsed.detectedType}
+                        </span>
+                        {driveParsed.id && (
+                          <span className="text-[11px] font-mono text-[var(--ink-muted)] truncate max-w-[140px] sm:max-w-[200px]">
+                            ID: {driveParsed.id}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        {logo !== "drive" && (
+                          <button
+                            type="button"
+                            onClick={() => setLogo("drive")}
+                            className="text-xs text-[var(--plum)] hover:underline flex items-center gap-1 cursor-pointer font-medium"
+                          >
+                            <GoogleDriveIcon className="w-3 h-3" />
+                            + Add Drive Badge to QR
+                          </button>
+                        )}
+                        <a
+                          href={driveParsed.optimizedUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs text-[var(--ink)] hover:text-[var(--plum)] inline-flex items-center gap-1 font-medium underline"
+                        >
+                          <span>Test Link</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="text-[11px] font-mono text-[var(--ink-muted)] bg-white/80 p-2 border border-[var(--border-subtle)] rounded-none break-all select-all">
+                      {driveParsed.optimizedUrl}
+                    </div>
+                  </div>
+
+                  {/* Permissions Advisory */}
+                  <div className="p-3 bg-amber-500/5 border border-amber-500/20 rounded-none text-xs text-[var(--ink-muted)] flex items-start gap-2.5">
+                    <span className="text-amber-600 font-bold shrink-0 mt-0.5">ℹ️</span>
+                    <div>
+                      <strong className="text-[var(--ink)]">Google Drive Sharing Permission:</strong>{" "}
+                      In Google Drive, ensure General Access is set to{" "}
+                      <span className="font-semibold text-[var(--ink)]">"Anyone with the link"</span>{" "}
+                      (Viewer) so users can instantly open the folder, watch the video, or view photos without an access request barrier.
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -567,9 +834,9 @@ export function InteractiveStudio() {
                 <label className="block text-xs font-semibold text-[var(--ink)] mb-2">
                   Center Logo Badge (Level-H Protected)
                 </label>
-                <div className="grid grid-cols-5 gap-1.5">
+                <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
                   {(
-                    ["none", "qrlab", "star", "heart", "shield"] as LogoPreset[]
+                    ["none", "qrlab", "drive", "star", "heart", "shield"] as LogoPreset[]
                   ).map((l) => (
                     <button
                       key={l}

@@ -4,6 +4,7 @@ import {
   LeafSpray,
   FloralSprig,
   CircularArrowButton,
+  GoogleDriveIcon,
 } from "./icons";
 
 export function DataFormatsGrid() {
@@ -115,6 +116,39 @@ export function DataFormatsGrid() {
               </div>
             </a>
           ))}
+        </div>
+
+        {/* Featured: Google Drive Cloud Media & Folders Card */}
+        <div className="max-w-5xl mx-auto mt-8">
+          <a
+            href="#studio"
+            className="group block bg-gradient-to-r from-[var(--bg-surface)] via-white to-[var(--butter-light)]/50 rounded-none p-6 sm:p-7 border border-[var(--border-subtle)] shadow-[0_8px_24px_rgba(74,15,58,0.04)] hover:shadow-[0_16px_36px_rgba(74,15,58,0.10)] transition-all duration-300 hover:-translate-y-0.5"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+              <div className="flex items-start sm:items-center gap-4">
+                <div className="w-14 h-14 rounded-none bg-white p-2.5 flex items-center justify-center shrink-0 border border-[var(--border-subtle)] shadow-xs group-hover:scale-105 transition-transform">
+                  <GoogleDriveIcon className="w-full h-full" />
+                </div>
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-none bg-[var(--plum-light)] text-[var(--plum)]">
+                      New Feature
+                    </span>
+                    <h4 className="font-serif text-lg sm:text-xl font-bold text-[var(--ink)]">
+                      Google Drive Videos, Photos & Folders
+                    </h4>
+                  </div>
+                  <p className="text-xs sm:text-sm text-[var(--ink-muted)] max-w-xl leading-relaxed">
+                    Paste any Google Drive link to generate an instant QR code. When scanned, it launches full-screen video streaming, high-res photos, or entire shared project folders with zero login friction.
+                  </p>
+                </div>
+              </div>
+              <div className="inline-flex items-center gap-2 text-xs font-semibold text-[var(--plum)] group-hover:text-[var(--plum-hover)] shrink-0 self-start sm:self-center">
+                <span>Create Drive QR</span>
+                <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </div>
+            </div>
+          </a>
         </div>
 
         {/* Morrow Signature "Not sure where to start?" Row Card */}
